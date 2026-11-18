@@ -25,6 +25,12 @@ import com.example.imcapp.ui.theme.colorUnSelectedCard
 import com.example.imcapp.ui.theme.imcTextSecondary
 import androidx.compose.runtime.getValue
 
+/**
+ * Selector de género: dos [GenderCard] en una fila, cada una con la mitad del ancho.
+ *
+ * @param isMaleSelected `true` si está seleccionado «Hombre».
+ * @param onGenderSelected recibe `true` al pulsar «Hombre» y `false` al pulsar «Mujer».
+ */
 @Preview
 @Composable
 fun GenderSelector(
@@ -52,6 +58,19 @@ fun GenderSelector(
     }
 }
 
+/**
+ * Tarjeta de un género con su símbolo y su nombre.
+ *
+ * Usa `Card` con `onClick` (respeta la forma redondeada y el efecto ripple).
+ * Al seleccionarla, el color cambia con `animateColorAsState` y se añaden
+ * un borde blanco y más elevación.
+ *
+ * @param modifier modificador de la tarjeta (su peso en la fila).
+ * @param gender nombre del género («Hombre» o «Mujer»).
+ * @param simbolo símbolo que se muestra en grande.
+ * @param isSelected si la tarjeta está seleccionada.
+ * @param onClick acción al pulsarla.
+ */
 @Composable
 fun GenderCard(
     modifier: Modifier,

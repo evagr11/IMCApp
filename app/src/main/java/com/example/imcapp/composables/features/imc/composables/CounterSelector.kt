@@ -25,6 +25,19 @@ import com.example.imcapp.ui.theme.colorUnSelectedCard
 import com.example.imcapp.ui.theme.imcBackground
 import com.example.imcapp.ui.theme.imcTextSecondary
 
+/**
+ * Contadores de peso y edad: dos [CounterCard] en una fila.
+ *
+ * Los límites de los valores se controlan en
+ * [com.example.imcapp.composables.features.imc.IMCScreen].
+ *
+ * @param age edad actual en años.
+ * @param onPlusAgeSelected se llama al pulsar + en la edad.
+ * @param onMinusAgeSelected se llama al pulsar − en la edad.
+ * @param weight peso actual en kilogramos.
+ * @param onPlusWeightSelected se llama al pulsar + en el peso.
+ * @param onMinusWeightSelected se llama al pulsar − en el peso.
+ */
 @Composable
 fun CounterSelector(
     age: Int,
@@ -57,6 +70,16 @@ fun CounterSelector(
     }
 }
 
+/**
+ * Tarjeta de contador con título, valor, unidad y botones − y +.
+ *
+ * @param modifier modificador de la tarjeta (su peso en la fila).
+ * @param title título en mayúsculas («PESO» o «EDAD»).
+ * @param value valor que se muestra.
+ * @param unit unidad que acompaña al valor («kg» o «años»).
+ * @param onPlus acción del botón +.
+ * @param onMinus acción del botón −.
+ */
 @Preview
 @Composable
 fun CounterCard(
@@ -108,6 +131,12 @@ fun CounterCard(
     }
 }
 
+/**
+ * Botón circular de 48 dp para sumar o restar.
+ *
+ * @param text símbolo del botón («+» o «−»).
+ * @param onClick acción al pulsarlo.
+ */
 @Composable
 fun RoundCounterButton(text: String, onClick: () -> Unit) {
     FilledIconButton(

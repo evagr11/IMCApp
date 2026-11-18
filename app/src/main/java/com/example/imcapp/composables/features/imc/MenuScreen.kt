@@ -16,6 +16,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 
+/**
+ * Menú principal del proyecto de clase.
+ *
+ * El botón «IMC Calculator» abre la calculadora y «TODO» muestra un aviso
+ * («Próximamente») reservado para las siguientes apps del curso.
+ *
+ * @param modifier modificador del [Scaffold] y de la columna de botones.
+ * @param onIMCSelected se llama al pulsar «IMC Calculator».
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MenuScreen(modifier: Modifier = Modifier, onIMCSelected:() -> Unit) {

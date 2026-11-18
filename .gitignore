@@ -13,6 +13,9 @@
 .externalNativeBuild
 .cxx
 local.properties
+.idea/
+
+# Firma y APK generadas
 *.jks
 *.keystore
 app/release/

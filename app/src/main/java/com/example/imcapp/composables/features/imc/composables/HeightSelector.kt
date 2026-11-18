@@ -23,6 +23,15 @@ import com.example.imcapp.ui.theme.colorUnSelectedCard
 import com.example.imcapp.ui.theme.imcAccent
 import com.example.imcapp.ui.theme.imcTextSecondary
 
+/**
+ * Tarjeta para elegir la altura entre 120 y 220 cm con un `Slider`.
+ *
+ * El estado vive en [com.example.imcapp.composables.features.imc.IMCScreen]
+ * (state hoisting): la tarjeta solo muestra el valor y avisa cuando cambia.
+ *
+ * @param height altura actual en centímetros.
+ * @param onHeightChange recibe la nueva altura al mover el `Slider`.
+ */
 @Composable
 fun HeightSelector(height: Float, onHeightChange: (Float) -> Unit) {
     Card(
@@ -73,6 +82,7 @@ fun HeightSelector(height: Float, onHeightChange: (Float) -> Unit) {
     }
 }
 
+/** Vista previa de [HeightSelector] con 170 cm. */
 @Preview
 @Composable
 fun HeightSelectorPreview() {

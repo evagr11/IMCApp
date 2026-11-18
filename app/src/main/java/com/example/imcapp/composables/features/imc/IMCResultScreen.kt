@@ -45,7 +45,13 @@ import com.example.imcapp.ui.theme.imcSurface
 import com.example.imcapp.ui.theme.imcTextSecondary
 import java.util.Locale
 
-/** Rangos de la OMS: cada uno con su título, descripción y color */
+/**
+ * Rangos de IMC de la OMS, cada uno con su título, descripción y color.
+ *
+ * @property title texto en mayúsculas que se muestra encima del valor.
+ * @property description explicación que se muestra debajo de la escala.
+ * @property color color de la categoría y de su tramo en [IMCScaleBar].
+ */
 enum class IMCCategory(val title: String, val description: String, val color: Color) {
     BAJO_PESO(
         "BAJO PESO",
@@ -69,6 +75,15 @@ enum class IMCCategory(val title: String, val description: String, val color: Co
     )
 }
 
+/**
+ * Devuelve la categoría que corresponde a un IMC.
+ *
+ * Menos de 18,5: bajo peso; de 18,5 a 25: normal; de 25 a 30: sobrepeso;
+ * 30 o más: obesidad.
+ *
+ * @param imc valor del IMC.
+ * @return la [IMCCategory] del valor.
+ */
 fun getIMCCategory(imc: Double): IMCCategory = when {
     imc < 18.5 -> IMCCategory.BAJO_PESO
     imc < 25.0 -> IMCCategory.NORMAL
@@ -76,6 +91,15 @@ fun getIMCCategory(imc: Double): IMCCategory = when {
     else -> IMCCategory.OBESIDAD
 }
 
+/**
+ * Pantalla de resultado.
+ *
+ * Muestra en una tarjeta la categoría en su color, el IMC con un decimal,
+ * la [IMCScaleBar] y la descripción, y el botón VOLVER A CALCULAR fijo abajo.
+ *
+ * @param result IMC calculado.
+ * @param onRecalculate se llama al pulsar VOLVER A CALCULAR.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IMCResultScreen(result: Double, onRecalculate: () -> Unit = {}) {
@@ -156,7 +180,15 @@ fun IMCResultScreen(result: Double, onRecalculate: () -> Unit = {}) {
     }
 }
 
-/** Barra de 4 colores (15 → 40) con un marcador donde cae el IMC */
+/**
+ * Barra de escala del IMC de 15 a 40.
+ *
+ * Tiene cuatro tramos de color, con un ancho proporcional a cada rango, y un
+ * marcador blanco donde cae el IMC. Los valores fuera de la escala se quedan
+ * en los extremos.
+ *
+ * @param imc valor del IMC que marca la barra.
+ */
 @Composable
 fun IMCScaleBar(imc: Double) {
     val min = 15.0
@@ -201,6 +233,7 @@ fun IMCScaleBar(imc: Double) {
     }
 }
 
+/** Vista previa de [IMCResultScreen] con un IMC de 22,5. */
 @Preview(showSystemUi = true)
 @Composable
 fun IMCResultScreenPreview() {

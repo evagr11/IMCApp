@@ -10,6 +10,13 @@ import com.example.imcapp.composables.features.imc.IMCResultScreen
 import com.example.imcapp.composables.features.imc.IMCScreen
 import com.example.imcapp.composables.features.imc.MenuScreen
 
+/**
+ * Navegación de la app con Navigation 3.
+ *
+ * Crea la pila de rutas empezando en [Menu] y asocia cada ruta con su pantalla.
+ * Navegar es añadir una ruta a la pila y volver es quitar la última.
+ * Las pantallas reciben funciones de callback, así no conocen la navegación.
+ */
 @Composable
 fun AppNavigation() {
     val backStack = rememberNavBackStack(Menu)

@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     // Serialización para las rutas de Navigation 3
     alias(libs.plugins.kotlin.serialization)
+    // Documentación del código (KDoc) en HTML. La 2.2.0 es la primera compatible con AGP 9
+    id("org.jetbrains.dokka") version "2.2.0"
 }
 
 android {
@@ -65,4 +67,30 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+}
+
+// Documentación del código (KDoc) en HTML con Dokka: .\gradlew :app:dokkaGenerate
+// Se genera en docs/kdoc/ y se publica con GitHub Pages.
+dokka {
+    moduleName.set("IMCApp")
+    dokkaPublications.html {
+        outputDirectory.set(rootProject.layout.projectDirectory.dir("docs/kdoc"))
+        // Oculta lo heredado de Android (ComponentActivity...) para que se vea solo el código propio
+        suppressInheritedMembers.set(true)
+    }
+    dokkaSourceSets.configureEach {
+        documentedVisibilities.set(
+            setOf(
+                org.jetbrains.dokka.gradle.engine.parameters.VisibilityModifier.Public,
+                org.jetbrains.dokka.gradle.engine.parameters.VisibilityModifier.Protected,
+                org.jetbrains.dokka.gradle.engine.parameters.VisibilityModifier.Internal,
+                org.jetbrains.dokka.gradle.engine.parameters.VisibilityModifier.Private
+            )
+        )
+        // Los ejercicios de clase de los módulos 1 a 4 no forman parte de la app
+        perPackageOption {
+            matchingRegex.set("com\\.example\\.imcapp\\.composables\\.modulo.*")
+            suppress.set(true)
+        }
+    }
 }

@@ -37,6 +37,16 @@ import com.example.imcapp.ui.theme.imcBackground
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 
+/**
+ * Pantalla de la calculadora de IMC.
+ *
+ * Guarda con `rememberSaveable` el género, la altura, el peso y la edad, para
+ * que no se pierdan al girar el móvil ni al volver del resultado. Muestra los
+ * selectores con scroll vertical y el botón CALCULAR fijo abajo.
+ *
+ * @param onCalculate recibe el IMC calculado al pulsar CALCULAR.
+ * @param onBack se llama al pulsar la flecha de la barra superior.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IMCScreen(
@@ -101,6 +111,12 @@ fun IMCScreen(
     }
 }
 
+/**
+ * Botón principal CALCULAR, a todo el ancho y con el color de acento.
+ *
+ * @param modifier modificador del botón (márgenes y espacio de la barra de navegación).
+ * @param onClick acción al pulsarlo.
+ */
 @Composable
 fun CalculateButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
     Button(
@@ -118,12 +134,19 @@ fun CalculateButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
     }
 }
 
-/** IMC = peso (kg) / altura (m)² */
+/**
+ * Calcula el Índice de Masa Corporal: peso (kg) / altura (m)².
+ *
+ * @param weight peso en kilogramos.
+ * @param heightCm altura en centímetros; se pasa a metros antes de aplicar la fórmula.
+ * @return el IMC sin redondear.
+ */
 fun calculateIMC(weight: Int, heightCm: Float): Double {
     val heightM = heightCm / 100.0
     return weight / (heightM * heightM)
 }
 
+/** Vista previa de [IMCScreen] en Android Studio. */
 @Preview(showSystemUi = true)
 @Composable
 fun IMCScreenPreview() {
